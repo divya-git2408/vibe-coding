@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VaultShield — Lock Down Your Passwords with Ironclad Security</title>
+
+  <!-- Heading Font: Helvetica Now Display Bold -->
+  <link rel="stylesheet" href="https://db.onlinewebfonts.com/c/04e6981992c0e2e7642af2074ebe3901?family=Helvetica+Now+Display+Bold">
+
+  <!-- Body Font: Inter (Google Fonts 300-900) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
+
+  <style>
+    /* CSS Variables */
+    :root {
+      --font-heading: 'Helvetica Now Display Bold', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --color-text: #192837;
+      --color-accent: #7342E2;
+      --color-login-bg: #F2F2EE;
+    }
+
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background-color: #0b1118;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    /* Container */
+    .vault-container {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* Background Video */
+    .vault-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .video-tint-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Navbar */
+    .vault-header {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+    }
+
+    .vault-nav {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    @media (min-width: 640px) {
+      .vault-nav {
+        padding: 22px 32px;
+      }
+    }
+
+    .brand-logo-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+    }
+
+    .nav-links-center {
+      display: none;
+      align-items: center;
+      gap: 36px;
+    }
+
+    @media (min-width: 768px) {
+      .nav-links-center {
+        display: flex;
+      }
+    }
+
+    .nav-item-link {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--color-text);
+      opacity: 0.8;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-item-link:hover {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    .nav-actions-right {
+      display: none;
+      align-items: center;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .nav-actions-right {
+        display: flex;
+      }
+    }
+
+    .nav-btn-start {
+      background: var(--color-accent);
+      color: #ffffff;
+      border-radius: 9999px;
+      padding: 10px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(115, 66, 226, 0.28);
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn-start:hover {
+      filter: brightness(1.1);
+      transform: scale(1.03);
+    }
+
+    .nav-btn-signin {
+      background: var(--color-login-bg);
+      color: var(--color-text);
+      border-radius: 9999px;
+      padding: 10px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn-signin:hover {
+      background: #e8e8e3;
+      transform: scale(1.03);
+    }
+
+    /* Mobile Hamburger Trigger */
+    .mobile-burger-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      color: var(--color-text);
+    }
+
+    @media (min-width: 768px) {
+      .mobile-burger-btn {
+        display: none;
+      }
+    }
+
+    /* Hero Section */
+    .vault-hero {
+      position: relative;
+      z-index: 10;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    @media (min-width: 640px) {
+      .vault-hero {
+        padding: 0 32px;
+      }
+    }
+
+    .hero-content-block {
+      max-width: 560px;
+      padding-top: clamp(40px, 8vw, 72px);
+    }
+
+    /* Hero Heading */
+    .hero-headline {
+      font-family: var(--font-heading);
+      font-size: clamp(1.65rem, 5vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--color-text);
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(28px);
+      animation: fadeUpIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0s forwards;
+    }
+
+    .inline-hero-icon {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      color: var(--color-text);
+      vertical-align: middle;
+      position: relative;
+      top: -2px;
+    }
+
+    .inline-hero-icon.zap-icon {
+      margin-right: 4px;
+    }
+
+    .inline-hero-icon.lock-icon {
+      margin: 0 4px;
+    }
+
+    .inline-hero-icon.fingerprint-icon {
+      margin-left: 4px;
+    }
+
+    /* Hero Subtext */
+    .hero-subtext {
+      font-family: var(--font-body);
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      line-height: 1.65;
+      color: var(--color-text);
+      opacity: 0;
+      max-width: 560px;
+      margin-bottom: 32px;
+      transform: translateY(28px);
+      animation: fadeUpIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+    }
+
+    /* CTA Button */
+    .cta-wrapper {
+      opacity: 0;
+      transform: translateY(28px);
+      animation: fadeUpIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.30s forwards;
+    }
+
+    .vault-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      background: var(--color-accent);
+      color: #ffffff;
+      border-radius: 50px;
+      padding: 17px 24px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      box-shadow: 0 4px 24px rgba(115, 66, 226, 0.28);
+      min-width: 210px;
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), filter 0.25s ease;
+    }
+
+    .vault-cta-btn:hover {
+      transform: scale(1.04);
+      filter: brightness(1.1);
+    }
+
+    .vault-cta-btn:active {
+      transform: scale(0.96);
+    }
+
+    .cta-arrow-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    @keyframes fadeUpIn {
+      0% {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mobile Sheet Drawer */
+    .mobile-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(25, 40, 55, 0.35);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 40;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .mobile-drawer-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-sheet {
+      position: fixed;
+      right: 0;
+      top: 0;
+      z-index: 50;
+      width: min(88vw, 360px);
+      height: 100dvh;
+      background: #CFC8C5;
+      box-shadow: -12px 0 48px rgba(25, 40, 55, 0.18);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+      transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .mobile-sheet.active {
+      transform: translateX(0);
+    }
+
+    .sheet-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(25, 40, 55, 0.15);
+    }
+
+    .sheet-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .sheet-link {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--color-text);
+      padding: 4px 0;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: opacity 0.35s ease, transform 0.35s ease, color 0.2s ease;
+    }
+
+    .mobile-sheet.active .sheet-link {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .sheet-link:hover {
+      color: var(--color-accent);
+    }
+
+    .sheet-footer-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(25, 40, 55, 0.15);
+    }
+
+    .sheet-btn {
+      width: 100%;
+      padding: 13px 0;
+      border-radius: 9999px;
+      text-align: center;
+      font-size: 14.5px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .sheet-btn-primary {
+      background: var(--color-accent);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(115, 66, 226, 0.28);
+    }
+
+    .sheet-btn-primary:hover {
+      filter: brightness(1.1);
+    }
+
+    .sheet-btn-secondary {
+      background: var(--color-login-bg);
+      color: var(--color-text);
+    }
+
+    .sheet-btn-secondary:hover {
+      background: #e8e8e3;
+    }
+
+    /* Workspace Switcher Bar */
+    .workspace-top-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(25, 40, 55, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      font-size: 12px;
+      color: #ffffff;
+    }
+
+    .ws-pill {
+      padding: 4px 12px;
+      border-radius: 9999px;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+      transition: all 0.2s ease;
+    }
+
+    .ws-pill:hover, .ws-pill.active {
+      background: var(--color-accent);
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="vault-container">
+    <!-- Background Video -->
+    <video
+      class="vault-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260518_003132_8b7edcb6-c64d-4a52-a9ca-879942e122ad.mp4"
+    ></video>
+
+    <!-- Subtle Tint Overlay -->
+    <div class="video-tint-overlay" aria-hidden="true"></div>
+
+    <!-- Header Navbar -->
+    <header class="vault-header">
+      <nav class="vault-nav" aria-label="Main Navigation">
+        <!-- Left: Brand Logo -->
+        <a href="#top" class="brand-logo-group" aria-label="VaultShield Home">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" overflow="visible" viewBox="0 0 256 256">
+            <path d="M 64 128 L 64.5 128 L 32 95 L 0 64 L 0 0 L 64 0 L 128 64 L 128 64.5 L 161 32 L 192 0 L 256 0 L 256 64 L 192 128 L 128 128 L 128 192 L 96 223 L 63.5 256 L 0 256 L 0 192 Z M 256 192 L 224 223 L 191.5 256 L 128 256 L 128 192 L 192 128 L 256 128 Z" fill="#192837"/>
+          </svg>
+          <span class="brand-title">VaultShield</span>
+        </a>
+
+        <!-- Center Links (Desktop only) -->
+        <div class="nav-links-center">
+          <a href="#vault" class="nav-item-link">Vault</a>
+          <a href="#plans" class="nav-item-link">Plans</a>
+          <a href="#install" class="nav-item-link">Install</a>
+          <a href="#news" class="nav-item-link">News</a>
+          <a href="#help" class="nav-item-link">Help</a>
+        </div>
+
+        <!-- Right Action Buttons (Desktop only) -->
+        <div class="nav-actions-right">
+          <a href="#start" class="nav-btn-start">Start For Free</a>
+          <a href="#signin" class="nav-btn-signin">Sign In</a>
+        </div>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-burger-btn" id="burger-open-btn" aria-label="Open Mobile Menu">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="6" x2="20" y2="6"></line>
+            <line x1="4" y1="18" x2="20" y2="18"></line>
+          </svg>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Hero Content -->
+    <main class="vault-hero" id="top">
+      <div class="hero-content-block">
+        <!-- Hero Heading with Inline Icons -->
+        <h1 class="hero-headline">
+          <!-- Zap Icon -->
+          <svg class="inline-hero-icon zap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>Lock Down Your Passwords 
+          <!-- LockKeyhole Icon -->
+          <svg class="inline-hero-icon lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="16" r="1"></circle>
+            <rect x="3" y="10" width="18" height="12" rx="2"></rect>
+            <path d="M7 10V7a5 5 0 0 1 10 0v3"></path>
+          </svg> with Ironclad Security 
+          <!-- Fingerprint Icon -->
+          <svg class="inline-hero-icon fingerprint-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"></path>
+            <path d="M14 13.12c0 2.38 0 6.38-1 8.88"></path>
+            <path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"></path>
+            <path d="M2 12a10 10 0 0 1 18-6"></path>
+            <path d="M2 16h.01"></path>
+            <path d="M21.8 16c.2-2 .131-5.354 0-6"></path>
+            <path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"></path>
+            <path d="M8.65 22c.21-.66.45-1.32.57-2"></path>
+            <path d="M9 6.8a6 6 0 0 1 9 5.2v2"></path>
+          </svg>
+        </h1>
+
+        <!-- Hero Subtext -->
+        <p class="hero-subtext">
+          Zero stress, total control. VaultShield keeps you covered with unbreakable storage, one-tap access, and pro-grade tools for your non-stop world.
+        </p>
+
+        <!-- CTA Button -->
+        <div class="cta-wrapper">
+          <a href="#get-started" class="vault-cta-btn">
+            <span>Get It Free</span>
+            <svg class="cta-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 16 16 12 12 8"></polyline>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Mobile Drawer Backdrop -->
+    <div class="mobile-drawer-backdrop" id="drawer-backdrop"></div>
+
+    <!-- Mobile Slide-in Sheet -->
+    <aside class="mobile-sheet" id="mobile-sheet" aria-label="Mobile Navigation">
+      <div>
+        <!-- Sheet Header -->
+        <div class="sheet-header">
+          <div class="brand-logo-group">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" overflow="visible" viewBox="0 0 256 256">
+              <path d="M 64 128 L 64.5 128 L 32 95 L 0 64 L 0 0 L 64 0 L 128 64 L 128 64.5 L 161 32 L 192 0 L 256 0 L 256 64 L 192 128 L 128 128 L 128 192 L 96 223 L 63.5 256 L 0 256 L 0 192 Z M 256 192 L 224 223 L 191.5 256 L 128 256 L 128 192 L 192 128 L 256 128 Z" fill="#192837"/>
+            </svg>
+            <span class="brand-title" style="font-size: 1.2rem;">VaultShield</span>
+          </div>
+          <button id="burger-close-btn" aria-label="Close menu" style="padding: 6px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Sheet Nav Links with Staggered Entrance -->
+        <nav class="sheet-nav-links">
+          <a href="#vault" class="sheet-link" style="transition-delay: 0.18s;">Vault</a>
+          <a href="#plans" class="sheet-link" style="transition-delay: 0.25s;">Plans</a>
+          <a href="#install" class="sheet-link" style="transition-delay: 0.32s;">Install</a>
+          <a href="#news" class="sheet-link" style="transition-delay: 0.39s;">News</a>
+          <a href="#help" class="sheet-link" style="transition-delay: 0.46s;">Help</a>
+        </nav>
+      </div>
+
+      <!-- Sheet Footer CTAs -->
+      <div class="sheet-footer-actions">
+        <a href="#start" class="sheet-btn sheet-btn-primary">Start For Free</a>
+        <a href="#signin" class="sheet-btn sheet-btn-secondary">Sign In</a>
+      </div>
+    </aside>
+
+    <!-- Workspace Floating Navigation Bar -->
+    <div class="workspace-top-bar">
+      <span style="opacity: 0.7;">Vibe Coding:</span>
+      <a href="index.html" class="ws-pill">Élan Atelier</a>
+      <a href="vaultshield.html" class="ws-pill active">VaultShield</a>
+      <a href="vesper.html" class="ws-pill">Vesper.ai</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const openBtn = document.getElementById('burger-open-btn');
+      const closeBtn = document.getElementById('burger-close-btn');
+      const backdrop = document.getElementById('drawer-backdrop');
+      const sheet = document.getElementById('mobile-sheet');
+      const sheetLinks = document.querySelectorAll('.sheet-link');
+
+      function openDrawer() {
+        backdrop.classList.add('active');
+        sheet.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeDrawer() {
+        backdrop.classList.remove('active');
+        sheet.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      if (openBtn) openBtn.addEventListener('click', openDrawer);
+      if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+      if (backdrop) backdrop.addEventListener('click', closeDrawer);
+
+      sheetLinks.forEach(link => {
+        link.addEventListener('click', closeDrawer);
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sheet.classList.contains('active')) {
+          closeDrawer();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

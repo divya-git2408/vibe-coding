@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ÉLAN ATELIER — Haute Couture & Editorial Runway</title>
+  <meta name="description" content="Maison Élan Atelier — An ultra-luxurious, editorial runway clothing brand experience tailored to your exact size, season, and occasion.">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="luxury-dark-mode">
+
+  <!-- Ambient Film Grain Overlay -->
+  <div class="film-grain" aria-hidden="true"></div>
+
+  <!-- Custom Magnetic Cursor for High-End Interaction -->
+  <div class="custom-cursor" id="custom-cursor" aria-hidden="true">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring">
+      <span class="cursor-label" id="cursor-label">EXPLORE</span>
+    </div>
+  </div>
+
+  <!-- Top Luxury Navigation Bar -->
+  <header class="atelier-header" id="atelier-header">
+    <div class="header-container">
+      
+      <!-- Brand Monogram & Logo -->
+      <a href="#" class="brand-monogram" id="brand-logo" aria-label="Élan Atelier Home">
+        <span class="monogram-symbol">É</span>
+        <div class="brand-name-group">
+          <span class="brand-title">ÉLAN</span>
+          <span class="brand-sub">ATELIER HAUTE COUTURE</span>
+        </div>
+      </a>
+
+      <!-- Active Concierge Pill / Requirement Summary -->
+      <button class="concierge-status-pill" id="concierge-status-btn" title="Edit your size, season & occasion requirements" aria-label="Open Style Concierge">
+        <span class="pill-sparkle">✦</span>
+        <span class="pill-label">STYLE CONCIERGE:</span>
+        <span class="pill-values" id="pill-summary-text">All Silhouettes · S / M · Autumn</span>
+        <span class="pill-edit-tag">CHANGE</span>
+      </button>
+
+      <!-- Currency Selector -->
+      <div class="currency-selector-group">
+        <label for="currency-select" class="currency-label">CURRENCY:</label>
+        <select id="currency-select" class="luxury-currency-select" aria-label="Select Currency">
+          <option value="USD" selected>USD ($)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="GBP">GBP (£)</option>
+          <option value="JPY">JPY (¥)</option>
+        </select>
+      </div>
+
+      <!-- View Switcher & Action Controls -->
+      <div class="header-actions">
+        
+        <!-- Dual View Toggle: Runway Reels vs Editorial Grid -->
+        <div class="view-switch-capsule" role="group" aria-label="View Switcher">
+          <button class="switch-btn active" id="switch-reels-btn" data-view="reels" title="Vertical Runway Reels Stream">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="5" y="2" width="14" height="20" rx="3"></rect>
+              <line x1="12" y1="18" x2="12" y2="18.01"></line>
+            </svg>
+            <span>REELS</span>
+          </button>
+          <button class="switch-btn" id="switch-catalog-btn" data-view="catalog" title="Editorial Catalog Lookbook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <span>CATALOG</span>
+          </button>
+        </div>
+
+        <!-- Ambient Runway Audio Synthesizer Toggle -->
+        <button class="icon-action-btn" id="audio-toggle-btn" title="Toggle Runway Ambient Audio" aria-label="Toggle Runway Ambient Sound">
+          <svg class="audio-on-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+          <svg class="audio-off-icon hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+          <span class="sound-wave-bars">
+            <i></i><i></i><i></i>
+          </span>
+        </button>
+
+        <!-- Wishlist Button -->
+        <button class="icon-action-btn" id="wishlist-btn" title="View Saved Silhouettes" aria-label="View Saved Items">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span class="badge-count" id="wishlist-count">0</span>
+        </button>
+
+        <!-- Wardrobe / Shopping Bag Drawer Trigger -->
+        <button class="icon-action-btn bag-btn" id="cart-drawer-btn" title="Your Wardrobe Selection" aria-label="Open Wardrobe Selection">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="bag-text">WARDROBE</span>
+          <span class="badge-count" id="cart-count">0</span>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- 1. STYLE CONCIERGE MODAL (Enter Requirements: Size, Season, Purpose)      -->
+  <!-- ========================================================================= -->
+  <div class="concierge-modal-backdrop" id="concierge-modal" role="dialog" aria-modal="true" aria-labelledby="concierge-modal-title">
+    <div class="concierge-card glass-panel">
+      
+      <!-- Close / Dismiss Button -->
+      <button class="modal-close-btn" id="concierge-close-btn" aria-label="Close Style Concierge">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Concierge Header -->
+      <div class="concierge-head">
+        <div class="concierge-kicker">ATELIER PRIVATE CONSULTATION</div>
+        <h2 id="concierge-modal-title" class="concierge-title">Define Your Silhouette</h2>
+        <p class="concierge-subtitle">
+          Personalize your runway feed. Enter your fit, season of interest, and occasion to curate an exclusive editorial wardrobe.
+        </p>
+      </div>
+
+      <!-- Step Navigation Indicator -->
+      <div class="step-indicator-bar">
+        <div class="step-dot active" data-step="1">
+          <span class="dot-num">01</span>
+          <span class="dot-title">FIT & SIZE</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-dot" data-step="2">
+          <span class="dot-num">02</span>
+          <span class="dot-title">SEASON</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-dot" data-step="3">
+          <span class="dot-num">03</span>
+          <span class="dot-title">OCCASION</span>
+        </div>
+      </div>
+
+      <!-- Step Content Wizard -->
+      <div class="wizard-steps-container">
+
+        <!-- STEP 1: FIT & SIZE -->
+        <section class="wizard-step active" id="wizard-step-1" data-step-index="1">
+          <div class="step-lead">
+            <span class="step-number-tag">STEP 01</span>
+            <h3>Select Your Tailoring Size</h3>
+            <p>Our garments are handcrafted according to Parisian haute couture proportions.</p>
+          </div>
+
+          <div class="size-options-grid">
+            <button type="button" class="size-pill" data-size="XS">
+              <span class="size-code">XS</span>
+              <span class="size-desc">FR 34 · US 0-2</span>
+            </button>
+            <button type="button" class="size-pill selected" data-size="S">
+              <span class="size-code">S</span>
+              <span class="size-desc">FR 36 · US 4-6</span>
+            </button>
+            <button type="button" class="size-pill" data-size="M">
+              <span class="size-code">M</span>
+              <span class="size-desc">FR 38 · US 8-10</span>
+            </button>
+            <button type="button" class="size-pill" data-size="L">
+              <span class="size-code">L</span>
+              <span class="size-desc">FR 40 · US 12-14</span>
+            </button>
+            <button type="button" class="size-pill" data-size="XL">
+              <span class="size-code">XL</span>
+              <span class="size-desc">FR 42 · US 16+</span>
+            </button>
+            <button type="button" class="size-pill bespoke-pill" data-size="custom">
+              <span class="size-code">SUR-MESURE</span>
+              <span class="size-desc">Custom Made-to-Measure</span>
+            </button>
+          </div>
+
+          <div class="step-footer">
+            <span class="match-hint">✦ Size <strong>S</strong> selected</span>
+            <button type="button" class="luxury-btn btn-forward" data-next="2">
+              <span>CONTINUE TO SEASON</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </section>
+
+        <!-- STEP 2: SEASON -->
+        <section class="wizard-step" id="wizard-step-2" data-step-index="2">
+          <div class="step-lead">
+            <span class="step-number-tag">STEP 02</span>
+            <h3>Choose Your Desired Season</h3>
+            <p>From breezy silk voiles of Summer to heavyweight sculptural wools of Winter.</p>
+          </div>
+
+          <div class="season-cards-grid">
+            <div class="season-card selected" data-season="all">
+              <div class="season-icon">◈</div>
+              <div class="season-info">
+                <h4>All Collections</h4>
+                <p>Complete editorial runway retrospective</p>
+              </div>
+            </div>
+
+            <div class="season-card" data-season="autumn-winter">
+              <div class="season-icon">❄</div>
+              <div class="season-info">
+                <h4>Autumn / Winter '26</h4>
+                <p>Virgin wool coats, Mongolian cashmere, sculpted trench</p>
+              </div>
+            </div>
+
+            <div class="season-card" data-season="spring-summer">
+              <div class="season-icon">☀</div>
+              <div class="season-info">
+                <h4>Spring / Summer '26</h4>
+                <p>Liquid Mulberry silk slips, fluid draping, luminous gold</p>
+              </div>
+            </div>
+
+            <div class="season-card" data-season="monochrome">
+              <div class="season-icon">◼</div>
+              <div class="season-info">
+                <h4>Monochromatic Capsule</h4>
+                <p>High-twist Barathea wool, corseted blazers, noir minimalism</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-footer">
+            <button type="button" class="ghost-btn btn-back" data-prev="1">
+              ← PREVIOUS
+            </button>
+            <button type="button" class="luxury-btn btn-forward" data-next="3">
+              <span>CONTINUE TO OCCASION</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </section>
+
+        <!-- STEP 3: OCCASION / PURPOSE -->
+        <section class="wizard-step" id="wizard-step-3" data-step-index="3">
+          <div class="step-lead">
+            <span class="step-number-tag">STEP 03</span>
+            <h3>Define Your Dressing Purpose</h3>
+            <p>What stage or occasion is this curated piece intended for?</p>
+          </div>
+
+          <div class="purpose-cards-grid">
+            <div class="purpose-card selected" data-purpose="all">
+              <div class="purpose-check">✓</div>
+              <div class="purpose-title">Universal Atelier</div>
+              <div class="purpose-desc">Showcase across every sartorial occasion</div>
+            </div>
+
+            <div class="purpose-card" data-purpose="gala">
+              <div class="purpose-check">✓</div>
+              <div class="purpose-title">Gala & Haute Soirée</div>
+              <div class="purpose-desc">Floor-grazing silks, backless gowns, midnight drama</div>
+            </div>
+
+            <div class="purpose-card" data-purpose="architectural">
+              <div class="purpose-check">✓</div>
+              <div class="purpose-title">Architectural Power Tailoring</div>
+              <div class="purpose-desc">Exaggerated shoulders, cinched corsetry, sharp lapels</div>
+            </div>
+
+            <div class="purpose-card" data-purpose="minimal-daily">
+              <div class="purpose-check">✓</div>
+              <div class="purpose-title">Quiet Luxury Daily</div>
+              <div class="purpose-desc">Oatmeal cashmere knitwear, pleated trousers, effortless poise</div>
+            </div>
+
+            <div class="purpose-card" data-purpose="resort">
+              <div class="purpose-check">✓</div>
+              <div class="purpose-title">Coastal & Resort Escape</div>
+              <div class="purpose-desc">Belgian natural flax, relaxed drape, sun-bleached minimalism</div>
+            </div>
+          </div>
+
+          <div class="step-footer">
+            <button type="button" class="ghost-btn btn-back" data-prev="2">
+              ← PREVIOUS
+            </button>
+            <button type="button" class="luxury-btn btn-finish" id="apply-concierge-btn">
+              <span>EXPLORE CURATED RUNWAY</span>
+              <span class="gold-shine"></span>
+            </button>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 2. RUNWAY REELS VIEW: Buttery Smooth Vertical Snap Scrolling Stream       -->
+  <!-- ========================================================================= -->
+  <main class="view-container active-view" id="reels-view" aria-label="Runway Reels Experience">
+    
+    <!-- Top Story / Reel Progress Bars -->
+    <div class="reels-progress-container" id="reels-progress-bar" aria-label="Reel Story Progress">
+      <!-- Dynamic progress segments injected via JS -->
+    </div>
+
+    <!-- Floating Navigation Arrows for Reels -->
+    <div class="reels-nav-controls" aria-label="Reels Navigation">
+      <button class="reel-nav-arrow up-arrow" id="reel-prev-arrow" title="Previous Look (↑ or Scroll Up)" aria-label="Previous Silhouette">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </button>
+      <div class="reel-index-indicator">
+        <span id="current-reel-num">01</span>
+        <span class="divider">/</span>
+        <span id="total-reel-num">05</span>
+      </div>
+      <button class="reel-nav-arrow down-arrow" id="reel-next-arrow" title="Next Look (↓ or Scroll Down)" aria-label="Next Silhouette">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Scroll Hint Capsule (Bottom Center) -->
+    <div class="scroll-flow-hint" id="scroll-hint">
+      <div class="mouse-icon">
+        <div class="wheel"></div>
+      </div>
+      <span>SCROLL OR SWIPE FOR NEXT SILHOUETTE</span>
+    </div>
+
+    <!-- The Vertical Snap Container -->
+    <div class="reels-snap-viewport" id="reels-viewport">
+      <!-- Reel items will be dynamically rendered and updated according to requirements -->
+    </div>
+
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- 3. EDITORIAL CATALOG LOOKBOOK VIEW (Curated Magazine Grid)               -->
+  <!-- ========================================================================= -->
+  <section class="view-container hidden-view" id="catalog-view" aria-label="Editorial Lookbook Catalog">
+    <div class="catalog-hero">
+      <div class="catalog-kicker">AUTELIER EDITORIAL ARCHIVE</div>
+      <h1 class="catalog-title">Curated Silhouettes</h1>
+      <p class="catalog-subtitle">
+        Every silhouette is precision-cut from the world’s most venerable mills. Tailored to your selected criteria.
+      <!-- Featured 3D Mocha Mousse Glass Card Capsule Banner -->
+      <div class="mocha-capsule-feature-block glass-panel">
+        <div class="mocha-capsule-copy">
+          <span class="mocha-sparkle-tag">✦ EXCLUSIVE AUTUMN CAPSULE</span>
+          <h2 class="mocha-capsule-title">The Mocha Mousse Archive</h2>
+          <p class="mocha-capsule-desc">
+            An intoxicating study in warm roasted espresso, whipped Mongolian cashmere, and structured bronze gabardine. Hover over the interactive 3D Couture Pass to explore the tactile elements.
+          </p>
+          <div class="mocha-capsule-actions">
+            <button class="luxury-btn" id="filter-mocha-btn">
+              <span>EXPLORE MOCHA & CASHMERE SILHOUETTES</span>
+              <span class="gold-shine"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- The 3D Glass Card in Mocha Mousse Theme -->
+        <div class="glass-card-3d-wrap" id="mocha-glass-card-stage" data-cursor="3D HOVER">
+          <div class="glass-card-3d-container">
+            <div class="glass-card-3d-shell">
+              <!-- Frosted glass inlay -->
+              <div class="glass-card-inlay"></div>
+              
+              <!-- Content -->
+              <div class="glass-card-content">
+                <div class="glass-card-badge-row">
+                  <span class="glass-sparkle">✦</span>
+                  <span class="glass-badge-text">HAUTE CAPSULE</span>
+                </div>
+                <h3 class="glass-card-heading">Mocha Mousse</h3>
+                <p class="glass-card-tagline">
+                  Velvety roasted cacao, whipped cashmere & architectural warm bronze tailoring.
+                </p>
+              </div>
+
+              <!-- Bottom Row -->
+              <div class="glass-card-bottom-row">
+                <div class="glass-social-icons">
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="glass-social-btn" title="Instagram">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                  </a>
+                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="glass-social-btn" title="Twitter">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                  </a>
+                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="glass-social-btn" title="Atelier Code">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  </a>
+                </div>
+
+                <div class="glass-view-more" id="glass-card-explore-btn">
+                  <span>Explore</span>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+
+              <!-- Concentric Staggered Circles -->
+              <div class="glass-circles-wrap">
+                <div class="glass-concentric-circle c1"></div>
+                <div class="glass-concentric-circle c2"></div>
+                <div class="glass-concentric-circle c3"></div>
+                <div class="glass-concentric-circle c4"></div>
+                <div class="glass-monogram-seal">É</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Mocha Mousse Kinetic Card Carousel Showcase -->
+      <section class="mocha-carousel-showcase-section glass-panel" id="mocha-carousel-section" aria-label="Mocha Mousse Runway Carousel">
+        <div class="mocha-carousel-header">
+          <div class="mocha-header-left">
+            <span class="mocha-kicker">✦ RUNWAY FAN-OUT REEL</span>
+            <h3 class="mocha-carousel-title">The Mocha Mousse Archive Reel</h3>
+            <p class="mocha-carousel-subtitle">
+              Interactive spring-physics carousel. Hover to fan out silhouettes, navigate between cards, or switch to monochrome mode.
+            </p>
+          </div>
+          <div class="mocha-mode-toggle-group" role="group" aria-label="Carousel Display Mode">
+            <button type="button" class="carousel-mode-btn active" id="carousel-mode-editorial">EDITORIAL</button>
+            <button type="button" class="carousel-mode-btn" id="carousel-mode-monochrome">MONOCHROME</button>
+          </div>
+        </div>
+
+        <!-- The Kinetic Card Carousel Stage -->
+        <div class="card-carousel-stage" id="card-carousel-stage" data-cursor="HOVER / TILT">
+          <div class="carousel-ambient-glow" aria-hidden="true"></div>
+          
+          <div class="carousel-viewport" id="carousel-viewport">
+            <div class="carousel-track" id="carousel-track">
+              <!-- Dynamically populated with kinetic fan-out cards -->
+            </div>
+          </div>
+
+          <!-- Carousel Controls Capsule -->
+          <div class="carousel-controls-pill">
+            <button type="button" class="carousel-ctrl-btn" id="carousel-prev-btn" aria-label="Previous Silhouette">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <div class="carousel-dots-group" id="carousel-dots-group">
+              <!-- Dynamically populated dot indicators -->
+            </div>
+            <button type="button" class="carousel-ctrl-btn" id="carousel-next-btn" aria-label="Next Silhouette">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+
+          <!-- Active Silhouette Inspection CTA -->
+          <div class="carousel-active-meta" id="carousel-active-meta">
+            <span class="active-meta-desc" id="carousel-active-desc">Fluid Mulberry Silk & Cowl Drape</span>
+            <button type="button" class="luxury-btn btn-xs" id="carousel-inspect-active-btn">
+              <span>INSPECT SILHOUETTE</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Active Filter Strip & Quick Sorters -->
+      <div class="catalog-filter-bar glass-panel">
+        <div class="active-tags-group" id="catalog-active-tags">
+          <!-- Dynamically populated tags -->
+        </div>
+
+        <div class="catalog-controls-right">
+          <label for="catalog-sort" class="sort-label">ORDER BY:</label>
+          <select id="catalog-sort" class="luxury-select">
+            <option value="curated">Curator's Recommendation</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="likes">Most Coveted</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Catalog Grid -->
+    <div class="catalog-grid" id="catalog-grid">
+      <!-- Grid items injected by JS with 3D tilt effects -->
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 4. FABRIC & SILHOUETTE INSPECTION MODAL (Deep-Dive Details)               -->
+  <!-- ========================================================================= -->
+  <div class="detail-modal-backdrop" id="detail-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="detail-modal-card glass-panel" id="detail-modal-content">
+      <!-- Injected dynamically on click -->
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 5. WARDROBE / SHOPPING BAG DRAWER                                         -->
+  <!-- ========================================================================= -->
+  <aside class="cart-drawer-backdrop" id="cart-drawer" aria-hidden="true">
+    <div class="cart-drawer-panel glass-panel">
+      
+      <div class="cart-drawer-header">
+        <div class="drawer-title-group">
+          <span class="drawer-kicker">PRIVATE ATELIER SELECTION</span>
+          <h3 class="drawer-title">Your Wardrobe</h3>
+        </div>
+        <button class="drawer-close-btn" id="cart-close-btn" aria-label="Close Wardrobe Drawer">
+          ✕
+        </button>
+      </div>
+
+      <!-- Currency Switcher Bar Inside Drawer -->
+      <div class="cart-currency-bar">
+        <span class="cart-currency-label">PRICING CURRENCY:</span>
+        <div class="cart-currency-options" id="cart-currency-pills">
+          <button class="curr-pill active" data-curr="USD">USD ($)</button>
+          <button class="curr-pill" data-curr="EUR">EUR (€)</button>
+          <button class="curr-pill" data-curr="GBP">GBP (£)</button>
+          <button class="curr-pill" data-curr="JPY">JPY (¥)</button>
+        </div>
+      </div>
+
+      <!-- Cart Items List Container -->
+      <div class="cart-items-container" id="cart-items-list">
+        <!-- Dynamically injected via JS -->
+      </div>
+
+      <!-- Bespoke Monogram Personalization Option -->
+      <div class="bespoke-monogram-block">
+        <div class="monogram-header">
+          <span class="monogram-sparkle">✦</span>
+          <strong>Complimentary Hand-Stitched Monogram</strong>
+        </div>
+        <div class="monogram-input-wrap">
+          <input type="text" id="cart-monogram-input" maxlength="4" placeholder="Enter Initials (e.g. D.T.)" aria-label="Monogram initials">
+          <small>Gold or charcoal silk thread hand-stitched inside lapel lining.</small>
+        </div>
+      </div>
+
+      <!-- White-Glove Packaging Gift Option -->
+      <div class="white-glove-toggle">
+        <label class="luxury-checkbox-label">
+          <input type="checkbox" id="white-glove-check" checked>
+          <span class="custom-check-mark"></span>
+          <span class="white-glove-text">
+            <strong>White-Glove Signature Packaging (Complimentary)</strong>
+            <small>Black velvet storage box, cedar garment bag & wax-sealed authenticity certificate.</small>
+          </span>
+        </label>
+      </div>
+
+      <!-- VIP Atelier Promo / Privilege Code -->
+      <div class="vip-coupon-section">
+        <div class="coupon-input-group">
+          <input type="text" id="coupon-input" placeholder="VIP Privilege Code (try 'VIP10' or 'VOGUE')" aria-label="VIP Privilege Code">
+          <button type="button" class="coupon-apply-btn" id="coupon-apply-btn">APPLY</button>
+        </div>
+        <div class="coupon-status-msg" id="coupon-status-msg"></div>
+      </div>
+
+      <!-- Cart Drawer Footer & Transparent Pricing Calculation -->
+      <div class="cart-drawer-footer">
+        <div class="cart-summary-line">
+          <span>GARMENT SUB-TOTAL</span>
+          <span id="cart-summary-subtotal">$0</span>
+        </div>
+        <div class="cart-summary-line discount-line hidden" id="cart-discount-row">
+          <span>VIP PRIVILEGE REDUCTION</span>
+          <span id="cart-summary-discount">-$0</span>
+        </div>
+        <div class="cart-summary-line">
+          <span>COUTURE HAND-TAILORING</span>
+          <span class="included-tag">COMPLIMENTARY</span>
+        </div>
+        <div class="cart-summary-line">
+          <span>INSURED GLOBAL COURIER</span>
+          <span class="included-tag">FREE EXPRESS</span>
+        </div>
+        <div class="cart-summary-line total-line">
+          <span>TOTAL INVESTMENT</span>
+          <span id="cart-summary-total">$0</span>
+        </div>
+        <div class="installment-preview" id="installment-preview-text">
+          or 4 interest-free investments of $0 with Maison Élan Privilege
+        </div>
+
+        <button class="luxury-btn checkout-btn" id="checkout-trigger-btn">
+          <span>PROCEED TO SECURE CHECKOUT</span>
+          <span class="gold-shine"></span>
+        </button>
+
+        <button class="clear-wardrobe-btn" id="clear-wardrobe-btn">
+          Clear Entire Wardrobe
+        </button>
+
+        <p class="bespoke-guarantee-note">
+          Insured worldwide courier shipping & private fitting alterations included with every commission.
+        </p>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- ========================================================================= -->
+  <!-- 6. MULTI-STEP LUXURY CHECKOUT CONSULTATION MODAL                          -->
+  <!-- ========================================================================= -->
+  <div class="checkout-modal-backdrop" id="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-modal-title" aria-hidden="true">
+    <div class="checkout-card glass-panel">
+      
+      <button class="modal-close-btn" id="checkout-close-btn" aria-label="Close Checkout">✕</button>
+
+      <!-- Checkout Header -->
+      <div class="checkout-head">
+        <div class="concierge-kicker">HAUTE COUTURE COMMISSION</div>
+        <h2 id="checkout-modal-title" class="checkout-title">Private Order Consultation</h2>
+        <p class="checkout-subtitle">
+          Confirm your delivery destination and sartorial payment preferences with our Private Client Salon.
+        </p>
+      </div>
+
+      <!-- Checkout Form Content -->
+      <form class="checkout-form" id="checkout-form" onsubmit="event.preventDefault();">
+        
+        <div class="checkout-section-title">01. VIP CLIENT & DELIVERY DESTINATION</div>
+        <div class="checkout-form-grid">
+          <div class="form-field">
+            <label for="client-name">FULL NAME / TITLED NAME</label>
+            <input type="text" id="client-name" required placeholder="Lady Eleanor Vance" value="Elena Rostova">
+          </div>
+          <div class="form-field">
+            <label for="client-email">PRIVATE CLIENT EMAIL</label>
+            <input type="email" id="client-email" required placeholder="vance@residence.com" value="elena.rostova@couture.com">
+          </div>
+          <div class="form-field full-width">
+            <label for="client-address">RESIDENCE / SUITE ADDRESS</label>
+            <input type="text" id="client-address" required placeholder="740 Park Avenue, Penthouse B" value="45 Quai d'Orsay, 7ème">
+          </div>
+          <div class="form-field">
+            <label for="client-city">METROPOLITAN CITY</label>
+            <input type="text" id="client-city" required placeholder="New York, NY" value="Paris">
+          </div>
+          <div class="form-field">
+            <label for="client-country">DESTINATION COUNTRY</label>
+            <select id="client-country" class="luxury-form-select">
+              <option value="FR" selected>France</option>
+              <option value="US">United States</option>
+              <option value="UK">United Kingdom</option>
+              <option value="IT">Italy</option>
+              <option value="JP">Japan</option>
+              <option value="CH">Switzerland</option>
+              <option value="AE">United Arab Emirates</option>
+            </select>
+          </div>
+          <div class="form-field full-width">
+            <label for="client-delivery-slot">WHITE-GLOVE DELIVERY TIME PREFERENCE</label>
+            <select id="client-delivery-slot" class="luxury-form-select">
+              <option value="morning">Morning Delivery with Fitting Specialist (09:00 - 12:00)</option>
+              <option value="afternoon">Afternoon Private Courier (14:00 - 18:00)</option>
+              <option value="evening">Evening Discrete Vault Drop (19:00 - 21:00)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="checkout-section-title" style="margin-top: 2rem;">02. DISCRETE SARTORIAL PAYMENT</div>
+        <div class="payment-methods-grid">
+          <label class="payment-method-card selected">
+            <input type="radio" name="pay-method" value="black-card" checked>
+            <span class="pay-icon">💳</span>
+            <div class="pay-info">
+              <strong>Centurion & Luxury Card</strong>
+              <small>Amex Black, Visa Infinite, Mastercard World Elite</small>
+            </div>
+          </label>
+          <label class="payment-method-card">
+            <input type="radio" name="pay-method" value="apple-pay">
+            <span class="pay-icon"></span>
+            <div class="pay-info">
+              <strong>Apple Pay / Google Pay</strong>
+              <small>Instant biometric authorization</small>
+            </div>
+          </label>
+          <label class="payment-method-card">
+            <input type="radio" name="pay-method" value="wire">
+            <span class="pay-icon">🏛</span>
+            <div class="pay-info">
+              <strong>Private Concierge Bank Wire</strong>
+              <small>Direct transfer with dedicated account officer</small>
+            </div>
+          </label>
+          <label class="payment-method-card">
+            <input type="radio" name="pay-method" value="installments">
+            <span class="pay-icon">✦</span>
+            <div class="pay-info">
+              <strong>Maison Élan Privilege 4x</strong>
+              <small>4 interest-free quarterly investments</small>
+            </div>
+          </label>
+        </div>
+
+        <!-- Simulated Card Details -->
+        <div class="card-details-box" id="card-details-fields">
+          <div class="checkout-form-grid">
+            <div class="form-field full-width">
+              <label for="card-num">CARD NUMBER</label>
+              <input type="text" id="card-num" placeholder="•••• •••• •••• 9842" value="4829 •••• •••• 9842">
+            </div>
+            <div class="form-field">
+              <label for="card-exp">EXPIRY DATE</label>
+              <input type="text" id="card-exp" placeholder="MM/YY" value="09/29">
+            </div>
+            <div class="form-field">
+              <label for="card-cvv">SECURITY CODE</label>
+              <input type="password" id="card-cvv" placeholder="CVV" value="894" maxlength="4">
+            </div>
+          </div>
+        </div>
+
+        <!-- Checkout Bottom Summary -->
+        <div class="checkout-footer">
+          <div class="checkout-total-col">
+            <span class="checkout-total-label">COMMISSION TOTAL:</span>
+            <span class="checkout-total-amount" id="checkout-modal-total">$0</span>
+          </div>
+          <button type="submit" class="luxury-btn finalize-order-btn" id="finalize-order-btn">
+            <span>AUTHORIZE & COMMISSION SILHOUETTES</span>
+            <span class="gold-shine"></span>
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 7. CELEBRATORY ACQUISITION ORDER RECEIPT MODAL                           -->
+  <!-- ========================================================================= -->
+  <div class="success-modal-backdrop" id="success-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="success-card glass-panel">
+      <div class="success-wax-seal">É</div>
+      <div class="success-kicker">COMMISSION CONFIRMED & LOGGED</div>
+      <h2>An Exceptional Choice</h2>
+      <p class="success-message">
+        Your bespoke commission order has been recorded into the Élan Atelier Archive. Our Master Tailor and private courier will reach out to confirm measurement nuances and fitting schedule.
+      </p>
+
+      <div class="order-ref-pill">
+        COMMISSION CODE: <strong id="order-code">#ELAN-9842</strong>
+      </div>
+
+      <!-- Itemized Receipt Summary Table -->
+      <div class="receipt-items-container" id="receipt-items-container">
+        <!-- Dynamically filled with ordered silhouettes -->
+      </div>
+
+      <div class="receipt-meta-box">
+        <div class="receipt-row">
+          <span>DESTINATION:</span>
+          <strong id="receipt-dest">Paris, France</strong>
+        </div>
+        <div class="receipt-row">
+          <span>COURIER:</span>
+          <strong>Private Armored Air Express (#DHL-LUXE-882194)</strong>
+        </div>
+        <div class="receipt-row">
+          <span>PACKAGING:</span>
+          <strong>Signature Black Velvet Box & Cedar Garment Case</strong>
+        </div>
+        <div class="receipt-row total-row">
+          <span>TOTAL AUTHORIZED:</span>
+          <strong id="receipt-total" style="color: var(--gold-champagne); font-size: 1.25rem;">$0</strong>
+        </div>
+      </div>
+
+      <div class="receipt-action-buttons">
+        <button class="ghost-btn" id="print-receipt-btn" onclick="window.print()">
+          PRINT COUTURE CERTIFICATE
+        </button>
+        <button class="luxury-btn" id="success-close-btn">
+          <span>RETURN TO RUNWAY</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-hub" id="toast-hub" aria-live="polite"></div>
+
+  <!-- Workspace Quick Switcher -->
+  <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; display: flex; align-items: center; gap: 8px; background: rgba(18, 14, 12, 0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); padding: 6px 14px; border-radius: 9999px; border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; color: #FAF6F0;">
+    <span style="color: #D4AF37; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">✦ Vibe Apps:</span>
+    <a href="index.html" style="padding: 4px 12px; border-radius: 9999px; background: #D4AF37; color: #08080A; font-weight: 600; text-decoration: none;">Élan Atelier</a>
+    <a href="vaultshield.html" style="padding: 4px 12px; border-radius: 9999px; background: rgba(255, 255, 255, 0.1); color: #FAF6F0; text-decoration: none; transition: background 0.2s;" onmouseover="this.style.background='rgba(115,66,226,0.8)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">VaultShield</a>
+    <a href="vesper.html" style="padding: 4px 12px; border-radius: 9999px; background: rgba(255, 255, 255, 0.1); color: #FAF6F0; text-decoration: none; transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">Vesper.ai</a>
+  </div>
+
+  <!-- Main JavaScript Application -->
+  <script src="scripts/app.js"></script>
+</body>
+</html>
